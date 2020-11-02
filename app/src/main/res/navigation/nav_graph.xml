@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentCollection">
+
+    <fragment
+        android:id="@+id/fragmentMain"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentMain"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/fragmentUserProfile"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentUserProfile"
+        android:label="fragment_user_profile"
+        tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/fragmentChat"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentChat"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/fragmentSettings"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentSettings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/fragmentDescription"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentDescription"
+        android:label="fragment_description"
+        tools:layout="@layout/fragment_description" />
+    <fragment
+        android:id="@+id/fragmentOrder"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentOrder"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order" />
+    <fragment
+        android:id="@+id/fragmentCollection"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentCollection"
+        android:label="fragment_collection"
+        tools:layout="@layout/fragment_collection" />
+</navigation>

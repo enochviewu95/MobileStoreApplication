@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/fragmentMain"
+        android:icon="@drawable/home_icon"
+        app:showAsAction="ifRoom"
+        android:checked="true"
+        android:title="@string/home"
+        android:orderInCategory="1"/>
+
+    <item android:id="@+id/fragmentUserProfile"
+        android:icon="@drawable/profile_icon"
+        app:showAsAction="ifRoom"
+        android:title="@string/profile"
+        android:orderInCategory="2"/>
+
+    <item android:id="@+id/fragmentChat"
+        android:icon="@drawable/messages_icon"
+        app:showAsAction="ifRoom"
+        android:title="@string/message"
+        android:orderInCategory="3"/>
+
+    <item android:id="@+id/fragmentSettings"
+        android:icon="@drawable/settings_icon"
+        app:showAsAction="ifRoom"
+        android:checked="true"
+        android:title="@string/settings"
+        android:orderInCategory="4"/>
+</menu>

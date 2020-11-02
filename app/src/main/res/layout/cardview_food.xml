@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/food_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+   <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/food_image"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/lucy_image"
+        android:contentDescription="@string/food_image" />
+
+    <LinearLayout
+        android:id="@+id/text_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="54dp">
+
+        <TextView
+            android:id="@+id/food_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/food_title"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+
+        <LinearLayout
+            android:id="@+id/text_view_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/seller"
+                android:text="@string/seller"
+                android:textColor="#ffffff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"/>
+
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:text="@string/location"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/food_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:isIndicator="true"
+            android:numStars="6"
+            android:progressTint="#ffffff"
+            android:rating="3"
+            android:progressBackgroundTint="#efefef"
+            style="?android:attr/ratingBarStyleSmall"
+            />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
