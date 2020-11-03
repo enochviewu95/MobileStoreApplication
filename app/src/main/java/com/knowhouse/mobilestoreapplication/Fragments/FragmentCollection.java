@@ -55,8 +55,6 @@ public class FragmentCollection extends Fragment {
         blurredImage = toolbar;
         blurredImage.setBackground(new BitmapDrawable(getResources(),blurredBitmap));
 
-
-
         return view;
 
     }
