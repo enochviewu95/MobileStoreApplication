@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/collection_content"
     android:layout_width="match_parent"
@@ -11,16 +12,27 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/lucy_image"
+        android:layout_height="240dp"
         android:fitsSystemWindows="true">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:fitsSystemWindows="true"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+            android:scaleX="2"
+            android:scaleY="3"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,7 +41,7 @@
         android:id="@+id/caption_image_cardview"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="100dp"
         android:layout_marginStart="20dp"
         app:cardElevation="4dp"
         app:cardCornerRadius="12dp">
@@ -44,17 +56,9 @@
     </androidx.cardview.widget.CardView>
 
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tablayout_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/app_bar_layout"/>
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/tablayout_viewpager"/>
+        android:layout_height="match_parent"/>
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

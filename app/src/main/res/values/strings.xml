@@ -14,4 +14,5 @@
     <string name="food_title">Pizza</string>
     <string name="blurred_image">Blurred Image</string>
     <string name="caption_image">caption image</string>
+    <string name="action_search">Search</string>
 </resources>

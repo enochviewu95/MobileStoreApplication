@@ -10,16 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.view.WindowManager;
+
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -28,6 +27,7 @@ import com.knowhouse.mobilestoreapplication.Adapters.StateAdapter;
 import com.knowhouse.mobilestoreapplication.BlurBuilder;
 import com.knowhouse.mobilestoreapplication.R;
 
+import java.util.Objects;
 
 
 public class FragmentCollection extends Fragment {
@@ -35,7 +35,7 @@ public class FragmentCollection extends Fragment {
 
     StateAdapter stateAdapter;
     ViewPager2 viewPager;
-    AppBarLayout blurredImage;
+    Toolbar blurredImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,15 +46,16 @@ public class FragmentCollection extends Fragment {
         View view = inflater.inflate(R.layout.fragment_collection, container, false);
 
         Toolbar toolbar = view.findViewById(R.id.tool_bar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
+        Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("");
+        Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.lucy_image);
+        Bitmap blurredBitmap = BlurBuilder.blur(getActivity(),originalBitmap);
 
-        Bitmap orignalBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.lucy_image);
-        Bitmap blurredBitmap = BlurBuilder.blur(getActivity(),orignalBitmap);
 
-        setAppBarHeight(view);
-
-        blurredImage = view.findViewById(R.id.app_bar_layout);
+        blurredImage = toolbar;
         blurredImage.setBackground(new BitmapDrawable(getResources(),blurredBitmap));
+
+
 
         return view;
 
@@ -84,27 +85,4 @@ public class FragmentCollection extends Fragment {
         tabLayoutMediator.attach();
     }
 
-    private void setAppBarHeight(View view){
-        AppBarLayout appBarLayout = view.findViewById(R.id.app_bar_layout);
-        appBarLayout.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                getStatusBarHeight()+dpToPx(48+56)));
-    }
-
-    private int getStatusBarHeight(){
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height","dimen","android");
-        if(resourceId > 0)
-            result = getResources().getDimensionPixelSize(resourceId);
-
-        return result;
-    }
-
-    private int dpToPx(int dp){{
-        float density = getResources()
-                .getDisplayMetrics()
-                .density;
-
-        return Math.round((float) dp * density);
-    }
-    }
 }
