@@ -15,4 +15,5 @@
     <string name="blurred_image">Blurred Image</string>
     <string name="caption_image">caption image</string>
     <string name="action_search">Search</string>
+    <string name="no_internet">Offline</string>
 </resources>

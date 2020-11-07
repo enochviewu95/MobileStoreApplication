@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/splash_background">
+        <shape android:shape="rectangle">
+            <solid android:color="#ffffff"/>
+        </shape>
+    </item>
+
+    <item
+        android:id="@+id/splash_icon"
+        android:gravity="center"
+        android:drawable="@drawable/fast_food"
+        android:width="120dp"
+        android:height="100dp"/>
+</layer-list>

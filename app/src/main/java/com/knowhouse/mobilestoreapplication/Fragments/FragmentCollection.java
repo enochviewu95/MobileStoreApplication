@@ -1,26 +1,20 @@
 package com.knowhouse.mobilestoreapplication.Fragments;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-
-
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.knowhouse.mobilestoreapplication.Adapters.StateAdapter;
@@ -33,6 +27,7 @@ import java.util.Objects;
 public class FragmentCollection extends Fragment {
 
 
+    public static final String ARGS_POSITION = "position";
     StateAdapter stateAdapter;
     ViewPager2 viewPager;
     Toolbar blurredImage;

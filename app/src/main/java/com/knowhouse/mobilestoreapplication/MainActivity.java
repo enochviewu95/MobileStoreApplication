@@ -18,15 +18,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_nav); //Reference to bottom navigation view
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
 
         assert navHostFragment != null;
-        NavController navController = navHostFragment.getNavController();
-        NavigationUI.setupWithNavController(bottomNav, navController);
-
-
-
+        NavController navController = navHostFragment.getNavController(); //get the controller for the nav host fragment
+        NavigationUI.setupWithNavController(bottomNav, navController);     //link the controller to the bottom navigation
 
     }
 

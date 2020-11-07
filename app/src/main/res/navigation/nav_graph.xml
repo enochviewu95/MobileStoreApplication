@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentMain">
+    app:startDestination="@id/fragmentContentSwitch">
 
     <fragment
         android:id="@+id/fragmentMain"
@@ -40,4 +40,9 @@
         android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentCollection"
         android:label="fragment_collection"
         tools:layout="@layout/fragment_collection" />
+    <fragment
+        android:id="@+id/fragmentContentSwitch"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentContentSwitch"
+        android:label="fragment_content_switch"
+        tools:layout="@layout/fragment_content_switch" />
 </navigation>
