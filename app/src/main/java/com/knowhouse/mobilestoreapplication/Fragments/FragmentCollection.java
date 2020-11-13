@@ -43,6 +43,8 @@ public class FragmentCollection extends Fragment {
         Toolbar toolbar = view.findViewById(R.id.tool_bar);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("");
+
+        //TODO: Get position using constant and use it to populate the view
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.lucy_image);
         Bitmap blurredBitmap = BlurBuilder.blur(getActivity(),originalBitmap);
 

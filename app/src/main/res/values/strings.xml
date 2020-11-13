@@ -16,4 +16,21 @@
     <string name="caption_image">caption image</string>
     <string name="action_search">Search</string>
     <string name="no_internet">Offline</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign In</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="hello_world">Hello Square World!</string>
+    <string name="password">Password</string>
+    <string name="login">Sign In</string>
+    <string name="username">Username</string>
+    <string name="full_name">Full Name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="questionnaire">Already have an account?</string>
 </resources>

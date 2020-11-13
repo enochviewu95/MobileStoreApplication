@@ -1,16 +1,14 @@
 package com.knowhouse.mobilestoreapplication;
 
-import android.content.Intent;
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SplashScreen extends AppCompatActivity {
+import android.os.Bundle;
+
+public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(SplashScreen.this,LoginActivity.class));
+        setContentView(R.layout.activity_registration);
     }
-
 }

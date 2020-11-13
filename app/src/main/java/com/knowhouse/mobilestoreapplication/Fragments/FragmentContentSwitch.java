@@ -26,8 +26,11 @@ public class FragmentContentSwitch extends Fragment{
         FragmentMain fragmentMain = new FragmentMain();
         fragmentMain.setArguments(requireActivity().getIntent().getExtras());
 
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.content_switch,fragmentMain).commit();
+        if(getActivity() != null){
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .add(R.id.content_switch,fragmentMain).commit();
+
+        }
 
         return view;
     }

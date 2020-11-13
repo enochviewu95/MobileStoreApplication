@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -9,6 +9,7 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent</item>
     </style>
 
     <style name="SplashTheme" parent="AppTheme">
