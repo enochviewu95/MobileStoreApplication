@@ -6,4 +6,5 @@
     <color name="search_bar_color">#292929</color>
     <color name="text_input_layout_color">#707070</color>
     <color name="button_text_color">#ffffff</color>
+    <color name="user_profile_header_bkg">#80DEEA</color>
 </resources>
