@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "433479438896",
+    "firebase_url": "https://mobilestore-f5507.firebaseio.com",
+    "project_id": "mobilestore-f5507",
+    "storage_bucket": "mobilestore-f5507.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433479438896:android:071f9680f60d7f3cfa53f5",
+        "android_client_info": {
+          "package_name": "com.knowhouse.mobilestoreapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433479438896-lk6eg6slf4h8aggut5duflgbkphgtgtg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.knowhouse.mobilestoreapplication",
+            "certificate_hash": "090caab6cb655364ced2693f56ee5e8e1e147909"
+          }
+        },
+        {
+          "client_id": "433479438896-o7dlkic6s5b0uc04d30tf12ondind4s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXtNcTrl2CNKHubsaWAyiWdD1T0AcYptI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "433479438896-o7dlkic6s5b0uc04d30tf12ondind4s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

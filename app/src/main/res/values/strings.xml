@@ -33,4 +33,14 @@
     <string name="sign_up">Sign Up</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="questionnaire">Already have an account?</string>
+    <string name="gender">Gender</string>
+    <string name="age">Age</string>
+    <string name="location_title">Location</string>
+    <string name="save">Save</string>
+    <string name="logout">Logout</string>
+
+    <string-array name="gender_list">
+        <item>M</item>
+        <item>F</item>
+    </string-array>
 </resources>

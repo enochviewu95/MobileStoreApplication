@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
     tools:context=".MainActivity">
 
     <androidx.fragment.app.FragmentContainerView
@@ -15,6 +16,8 @@
         android:layout_height="0dp"
         android:layout_weight="10"
         android:layout_gravity="top"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"/>
 

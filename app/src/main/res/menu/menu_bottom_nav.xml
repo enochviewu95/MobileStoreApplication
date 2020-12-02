@@ -8,16 +8,16 @@
         android:title="@string/home"
         android:orderInCategory="1"/>
 
-    <item android:id="@+id/fragmentUserProfile"
-        android:icon="@drawable/profile_icon"
-        app:showAsAction="ifRoom"
-        android:title="@string/profile"
-        android:orderInCategory="2"/>
-
     <item android:id="@+id/fragmentChat"
         android:icon="@drawable/messages_icon"
         app:showAsAction="ifRoom"
         android:title="@string/message"
+        android:orderInCategory="2"/>
+
+    <item android:id="@+id/fragmentUserProfile"
+        android:icon="@drawable/profile_icon"
+        app:showAsAction="ifRoom"
+        android:title="@string/profile"
         android:orderInCategory="3"/>
 
     <item android:id="@+id/fragmentSettings"
