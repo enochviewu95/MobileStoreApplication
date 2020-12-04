@@ -24,7 +24,7 @@ public class FragmentContentSwitch extends Fragment{
 
         if(getActivity() != null){
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .add(R.id.content_switch,fragmentMain).commit();
+                    .replace(R.id.content_switch,fragmentMain).commit();
 
         }
 
