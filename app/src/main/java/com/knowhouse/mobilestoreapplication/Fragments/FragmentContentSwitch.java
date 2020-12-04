@@ -3,16 +3,12 @@ package com.knowhouse.mobilestoreapplication.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.knowhouse.mobilestoreapplication.R;
-import com.knowhouse.mobilestoreapplication.RecyclerViewClickInterface;
-
-import java.util.Objects;
 
 public class FragmentContentSwitch extends Fragment{
 

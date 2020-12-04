@@ -18,7 +18,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.knowhouse.mobilestoreapplication.Adapters.StateAdapter;
-import com.knowhouse.mobilestoreapplication.BlurBuilder;
+import com.knowhouse.mobilestoreapplication.Utilities.BlurBuilder;
 import com.knowhouse.mobilestoreapplication.R;
 
 import java.util.Objects;

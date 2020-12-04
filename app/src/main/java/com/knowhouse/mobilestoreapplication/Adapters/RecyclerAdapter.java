@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.knowhouse.mobilestoreapplication.R;
-import com.knowhouse.mobilestoreapplication.RecyclerViewClickInterface;
+import com.knowhouse.mobilestoreapplication.Interfaces.RecyclerViewClickInterface;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
@@ -45,13 +45,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CardView cardView = holder.cardView;
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(recyclerViewClickInterface != null){
+        cardView.setOnClickListener(v -> {
+            if(recyclerViewClickInterface != null){
 
-                    recyclerViewClickInterface.onItemClick(position);
-                }
+                recyclerViewClickInterface.onItemClick(position);
             }
         });
     }

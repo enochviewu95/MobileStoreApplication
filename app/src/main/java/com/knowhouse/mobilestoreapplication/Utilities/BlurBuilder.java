@@ -1,4 +1,4 @@
-package com.knowhouse.mobilestoreapplication;
+package com.knowhouse.mobilestoreapplication.Utilities;
 
 import android.content.Context;
 import android.graphics.Bitmap;

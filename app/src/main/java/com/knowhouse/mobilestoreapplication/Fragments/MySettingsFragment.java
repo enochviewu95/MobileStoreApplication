@@ -1,8 +1,10 @@
-package com.knowhouse.mobilestoreapplication;
+package com.knowhouse.mobilestoreapplication.Fragments;
 
 import android.os.Bundle;
 
 import androidx.preference.PreferenceFragmentCompat;
+
+import com.knowhouse.mobilestoreapplication.R;
 
 public class MySettingsFragment extends PreferenceFragmentCompat {
     @Override

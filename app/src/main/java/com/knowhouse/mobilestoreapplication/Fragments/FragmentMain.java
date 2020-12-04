@@ -6,9 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.knowhouse.mobilestoreapplication.Adapters.RecyclerAdapter;
 import com.knowhouse.mobilestoreapplication.R;
-import com.knowhouse.mobilestoreapplication.RecyclerViewClickInterface;
-
-import java.util.Objects;
+import com.knowhouse.mobilestoreapplication.Interfaces.RecyclerViewClickInterface;
 
 public class FragmentMain extends Fragment implements RecyclerViewClickInterface {
 
@@ -48,14 +44,11 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
 
         SwipeRefreshLayout mySwipeRefreshLayout = view.findViewById(R.id.swipe_refresh);
         mySwipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        Log.i(LOG_TAG,"onRefresh called from SwipeRefreshLayout");
+                () -> {
+                    Log.i(LOG_TAG,"onRefresh called from SwipeRefreshLayout");
 
-                        //This method performs the actual data-refresh operation.
-                        //This method calls setRefreshing(false) when it's finished
-                    }
+                    //This method performs the actual data-refresh operation.
+                    //This method calls setRefreshing(false) when it's finished
                 }
         );
 
