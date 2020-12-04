@@ -9,6 +9,7 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:screenOrientation">portrait</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
         <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent</item>
     </style>
 

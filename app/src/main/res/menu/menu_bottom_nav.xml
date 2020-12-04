@@ -11,7 +11,7 @@
     <item android:id="@+id/fragmentChat"
         android:icon="@drawable/messages_icon"
         app:showAsAction="ifRoom"
-        android:title="@string/message"
+        android:title="@string/enquiry"
         android:orderInCategory="2"/>
 
     <item android:id="@+id/fragmentUserProfile"

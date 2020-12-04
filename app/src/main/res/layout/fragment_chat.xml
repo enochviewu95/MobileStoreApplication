@@ -32,9 +32,10 @@
             android:layout_marginStart="8dp"
             android:layout_centerVertical="true"
             android:textSize="18sp"
-            android:text="Type a message ..."
+            android:hint="@string/submit_enquiry"
             android:background="@drawable/user_profile_detail_bkg"
-            android:inputType="text" />
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
         <ImageButton
             android:id="@+id/send_button"
@@ -43,9 +44,9 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/send"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/send_button_content_descrip" />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

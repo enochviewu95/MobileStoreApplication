@@ -10,7 +10,6 @@
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/recycler_view"
-        android:contentDescription="@string/search_bar"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
