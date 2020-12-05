@@ -3,7 +3,7 @@ package com.knowhouse.mobilestoreapplication.VolleyRequests;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-class SharedPrefManager {
+public class SharedPrefManager {
     private static SharedPrefManager mInstance;
     private static Context mCtx;
     private static final String SHARE_PREF_NAME = "mysharedpref";

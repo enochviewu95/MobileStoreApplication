@@ -19,10 +19,9 @@ public class FragmentContentSwitch extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_content_switch,container,false);
 
-        FragmentMain fragmentMain = new FragmentMain();
-        fragmentMain.setArguments(requireActivity().getIntent().getExtras());
-
         if(getActivity() != null){
+            FragmentMain fragmentMain = new FragmentMain();
+            fragmentMain.setArguments(getActivity().getIntent().getExtras());
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.content_switch,fragmentMain).commit();
 

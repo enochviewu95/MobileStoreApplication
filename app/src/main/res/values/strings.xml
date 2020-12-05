@@ -37,6 +37,7 @@
     <string name="send_button_content_descrip">Send Button</string>
     <string name="submit_enquiry">Make your enquiry …</string>
     <string name="enquiry">Enquiries</string>
+    <string name="phone_number">Phone Number</string>
 
     <string-array name="gender_list">
         <item>M</item>
