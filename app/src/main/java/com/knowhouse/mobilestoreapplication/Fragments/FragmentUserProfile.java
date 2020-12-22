@@ -1,8 +1,10 @@
 package com.knowhouse.mobilestoreapplication.Fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.knowhouse.mobilestoreapplication.Interfaces.DialogResponseInterface;
@@ -33,10 +38,14 @@ public class FragmentUserProfile extends Fragment {
     private TextView userFullName;
     private Spinner gender;
     private TextInputEditText age;
-    private TextView location;
+    private TextView locations;
     private TextInputEditText email;
     private TextInputEditText phoneNumber;
     private Button saveButton;
+
+    private FusedLocationProviderClient fusedLocationClient;
+
+    public final static String CountryCode = "+233";
 
 
 
@@ -51,10 +60,12 @@ public class FragmentUserProfile extends Fragment {
         userFullName  = view.findViewById(R.id.user_full_name);
         gender = view.findViewById(R.id.gender_spinner);
         age = view.findViewById(R.id.userAge);
-        location = view.findViewById(R.id.default_location);
+        locations = view.findViewById(R.id.default_location);
         email = view.findViewById(R.id.user_profile_email);
         phoneNumber = view.findViewById(R.id.user_profile_phone);
         saveButton = view.findViewById(R.id.save_button);
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
 
         checkPermission();
         populateView();
@@ -76,10 +87,20 @@ public class FragmentUserProfile extends Fragment {
         if(ContextCompat.checkSelfPermission(
                 getContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED){
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener((Activity) getContext(), new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            //Got last know location.
+                            if(location!=null){
 
-            //performAction();
-        }else if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)){
-            showInContextUI();
+                                locations.setText(location.toString());
+                                SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getContext());
+                                sharedPrefManager.setLocation(location);
+
+                            }
+                        }
+                    });
         }else{
             //you can directly ask for the permission.
             //the registered activityResultCallback gets the results of this request
@@ -88,20 +109,15 @@ public class FragmentUserProfile extends Fragment {
         }
     }
 
-    private void showInContextUI(){
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        PromptUserFragment promptUserFragment = new PromptUserFragment();
-        promptUserFragment.show(fragmentManager,"dialog");
-
-    }
-
     private ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted->{
                 if(isGranted){
                     //Permission is granted. Continue the action or workflow
+                    checkPermission();
                 }else{
                     //Explain to the user that the feature is unavailable because the
                     //feature requires the permission.
+
                 }
             });
 
@@ -109,6 +125,8 @@ public class FragmentUserProfile extends Fragment {
         SharedPrefManager prefManager = SharedPrefManager.getInstance(getContext());
         userFullName.setText(prefManager.getUserFullName());
         email.setText(prefManager.getUserEmail());
-        phoneNumber.setText(prefManager.getPhoneNumber());
+        phoneNumber.setText(CountryCode+prefManager.getPhoneNumber());
+        locations.setText(prefManager.getLocation());
     }
+
 }

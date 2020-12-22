@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void login(String email,String password){
-        String url = "http://192.168.42.61:80/MobileStoreApp/PhpScripts/Login.php";
+        String url = "http://192.168.42.61/MobileStoreApp/PhpScripts/Login.php";
 
         RequestQueue queue  = MySingleton.getInstance(this.getApplicationContext()).
                 getRequestQueue();

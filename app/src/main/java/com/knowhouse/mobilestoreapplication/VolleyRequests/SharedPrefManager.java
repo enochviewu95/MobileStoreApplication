@@ -2,6 +2,7 @@ package com.knowhouse.mobilestoreapplication.VolleyRequests;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Location;
 
 public class SharedPrefManager {
     private static SharedPrefManager mInstance;
@@ -60,6 +61,14 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
                 Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_LOCATION,null);
+    }
+
+    public void setLocation(Location myLocation){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        String fineLocation = myLocation.toString();
+        editor.putString(KEY_LOCATION,fineLocation);
     }
 
     public void onUserLogin(int id,int phoneNumber,String full_name,String email){
