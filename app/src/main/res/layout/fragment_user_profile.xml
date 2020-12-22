@@ -71,6 +71,7 @@
                     android:textColor="#000000" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/gender_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="14dp"
@@ -97,11 +98,12 @@
                     android:textColor="#000000" />
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userAge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:gravity="center"
-                    android:text="25"
+                    android:text="@string/age_number"
                     android:focusable="false"
                     android:textColor="@color/user_profile_theme_color" />
 
@@ -125,10 +127,11 @@
                     android:textColor="#000000" />
 
                 <TextView
+                    android:id="@+id/default_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Ejisu"
+                    android:text="@string/place_located"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/user_profile_theme_color" />
 
@@ -150,7 +153,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:inputType="textEmailAddress"
-            android:text="viewenoch@gmail.com"
+            android:text="@string/default_email"
             android:layout_marginTop="50dp"
             android:layout_marginStart="50dp"
             android:drawableStart="@drawable/email"
@@ -165,7 +168,7 @@
             android:layout_height="40dp"
             android:inputType="textEmailAddress"
             android:drawableStart="@drawable/phone"
-            android:text="233548409503"
+            android:text="@string/default_phone"
             android:layout_below="@id/user_profile_email"
             android:layout_alignStart="@id/user_profile_email"
             android:drawablePadding="20dp"
@@ -187,7 +190,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="@string/save"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginStart="30dp"
                 android:textColor="@color/button_text_color"
@@ -200,7 +203,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/logout"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:layout_weight="1"
                 android:textColor="@color/button_text_color"
                 android:layout_marginStart="30dp"

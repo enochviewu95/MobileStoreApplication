@@ -38,6 +38,13 @@
     <string name="submit_enquiry">Make your enquiry …</string>
     <string name="enquiry">Enquiries</string>
     <string name="phone_number">Phone Number</string>
+    <string name="age_number">00</string>
+    <string name="place_located">Accra</string>
+    <string name="default_email">johndoe@gmail.com</string>
+    <string name="default_phone">xxx-xxx-xxxx</string>
+    <string name="dialog_message">Location permission needed for delivery of food</string>
+    <string name="okayButton">Ok</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="gender_list">
         <item>M</item>

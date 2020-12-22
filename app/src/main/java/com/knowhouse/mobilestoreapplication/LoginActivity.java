@@ -1,6 +1,5 @@
 package com.knowhouse.mobilestoreapplication;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -9,17 +8,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.knowhouse.mobilestoreapplication.VolleyRequests.MySingleton;
+import com.knowhouse.mobilestoreapplication.VolleyRequests.SharedPrefManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -62,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v.equals(v.findViewById(R.id.signin_button))) {
             userLogin();
         }else if(v.equals(v.findViewById(R.id.registration_redirect))){
-            onSignUp(v);
+            onSignUp();
         }
     }
 
@@ -71,26 +76,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(email.getText() != null && password.getText()!=null){
             final String userEmail = email.getText().toString().trim();
             final String userPassword = password.getText().toString().trim();
-
             if(!userEmail.isEmpty() && !userPassword.isEmpty()){
                 progressDialog.setMessage("Logging In User ...");
                 progressDialog.show();
                 mAuth.signInWithEmailAndPassword(userEmail,userPassword)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
-                                    //signin successful
-                                    Log.d(TAG,"signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    updateUI(user);
-                                }else{
-                                    //if sign in fails
-                                    progressDialog.dismiss();
-                                    Log.w(TAG,"signInWithEmail:failure",task.getException());
-                                    Toast.makeText(LoginActivity.this,"Authentication failed",
-                                            Toast.LENGTH_LONG).show();
-                                }
+                        .addOnCompleteListener(this, task -> {
+                            if(task.isSuccessful()){
+                                //signin successful
+                                Log.d(TAG,"signInWithEmail:success");
+                                login(userEmail,userPassword);
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                updateUI(user);
+                            }else{
+                                //if sign in fails
+                                progressDialog.dismiss();
+                                Log.w(TAG,"signInWithEmail:failure",task.getException());
+                                Toast.makeText(LoginActivity.this,"Authentication failed",
+                                        Toast.LENGTH_LONG).show();
                             }
                         });
 
@@ -101,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void onSignUp(View view) {
+    private void onSignUp() {
         startActivity(new Intent(LoginActivity.this,RegistrationActivity.class));
     }
 
@@ -111,6 +113,51 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
             finish();
         }
+    }
+
+    private void login(String email,String password){
+        String url = "http://192.168.42.61:80/MobileStoreApp/PhpScripts/Login.php";
+
+        RequestQueue queue  = MySingleton.getInstance(this.getApplicationContext()).
+                getRequestQueue();
+
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    JSONObject obj = null;
+                    JSONObject content = null;
+                    try {
+                        obj = new JSONObject(response);
+                        content = new JSONObject(obj.getString("content"));
+
+                        if(!obj.getBoolean("error")){
+                            SharedPrefManager.getInstance(getApplicationContext())
+                                    .onUserLogin(content.getInt("id"),
+                                                content.getInt("contact"),
+                                                content.getString("full_name"),
+                                                content.getString("email"));
+                            Toast.makeText(getApplicationContext(),obj.getString("message"),Toast.LENGTH_LONG)
+                                    .show();
+                        }else{
+                            Toast.makeText(getApplicationContext(),obj.getString("message"),Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                },
+                Throwable::printStackTrace){
+            @Override
+            protected Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("email",email);
+                params.put("password",password);
+
+                return params;
+            }
+        };
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
 }
