@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -29,9 +33,14 @@ import com.knowhouse.mobilestoreapplication.LoginActivity;
 import com.knowhouse.mobilestoreapplication.R;
 import com.knowhouse.mobilestoreapplication.VolleyRequests.SharedPrefManager;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FragmentUserProfile extends Fragment {
+public class FragmentUserProfile extends Fragment implements View.OnClickListener{
 
     private Button logoutButton;
     private CircleImageView profileImage;
@@ -65,39 +74,48 @@ public class FragmentUserProfile extends Fragment {
         phoneNumber = view.findViewById(R.id.user_profile_phone);
         saveButton = view.findViewById(R.id.save_button);
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
 
         checkPermission();
-        populateView();
 
-        logoutButton.setOnClickListener(v -> {
-
-            if(SharedPrefManager.getInstance(getContext())
-            .logOut()){
-
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getContext(),LoginActivity.class));
-                requireActivity().finish();
-            }
-        });
+        logoutButton.setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        populateView();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(SharedPrefManager.getInstance(getContext())
+                .logOut()){
+
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getContext(),LoginActivity.class));
+            requireActivity().finish();
+        }
     }
 
     private void checkPermission(){
         if(ContextCompat.checkSelfPermission(
-                getContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED){
             fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener((Activity) getContext(), new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                            //Got last know location.
-                            if(location!=null){
-
-                                locations.setText(location.toString());
-                                SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(getContext());
-                                sharedPrefManager.setLocation(location);
-
+                    .addOnSuccessListener((Activity) requireContext(), location -> {
+                        //Got last know location.
+                        if(location!=null){
+                            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+                            try{
+                                List<Address> address = geocoder.
+                                        getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                                Address obj = address.get(0);
+                                SharedPrefManager prefManager = SharedPrefManager.getInstance(getContext());
+                                prefManager.setLocation(obj.getLocality());
+                            }catch (IOException e){
+                                e.printStackTrace();
                             }
                         }
                     });
@@ -125,7 +143,7 @@ public class FragmentUserProfile extends Fragment {
         SharedPrefManager prefManager = SharedPrefManager.getInstance(getContext());
         userFullName.setText(prefManager.getUserFullName());
         email.setText(prefManager.getUserEmail());
-        phoneNumber.setText(CountryCode+prefManager.getPhoneNumber());
+        phoneNumber.setText(CountryCode + prefManager.getPhoneNumber());
         locations.setText(prefManager.getLocation());
     }
 

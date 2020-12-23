@@ -22,7 +22,7 @@ public class StateAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
 
-        Fragment fragment = null;
+        Fragment fragment;
 
         switch(position){
             case 0:
@@ -37,6 +37,7 @@ public class StateAdapter extends FragmentStateAdapter {
         }
 
     }
+
 
     @Override
     public int getItemCount() {

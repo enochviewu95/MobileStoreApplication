@@ -63,12 +63,12 @@ public class SharedPrefManager {
         return sharedPreferences.getString(KEY_LOCATION,null);
     }
 
-    public void setLocation(Location myLocation){
+    public void setLocation(String myLocation){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String fineLocation = myLocation.toString();
-        editor.putString(KEY_LOCATION,fineLocation);
+        editor.putString(KEY_LOCATION,myLocation);
+        editor.apply();
     }
 
     public void onUserLogin(int id,int phoneNumber,String full_name,String email){

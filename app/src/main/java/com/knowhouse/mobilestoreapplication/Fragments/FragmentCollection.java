@@ -61,6 +61,7 @@ public class FragmentCollection extends Fragment {
         stateAdapter = new StateAdapter(this);
         viewPager = view.findViewById(R.id.view_pager);
         viewPager.setAdapter(stateAdapter);
+        viewPager.setUserInputEnabled(false);
         TabLayout tabLayout = view.findViewById(R.id.tablayout_viewpager);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 tabLayout, viewPager, (tab, position) -> {
