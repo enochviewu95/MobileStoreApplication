@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
             android:isIndicator="true"
-            android:numStars="6"
+            android:numStars="5"
             android:progressTint="#ffffff"
             android:rating="3"
             android:progressBackgroundTint="#efefef"

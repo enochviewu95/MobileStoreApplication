@@ -1,7 +1,5 @@
 package com.knowhouse.mobilestoreapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +9,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.knowhouse.mobilestoreapplication.VolleyRequests.ConstantURL;
 import com.knowhouse.mobilestoreapplication.VolleyRequests.MySingleton;
 import com.knowhouse.mobilestoreapplication.VolleyRequests.SharedPrefManager;
 
@@ -116,11 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void login(String email,String password){
-        String url = "http://192.168.42.61/MobileStoreApp/PhpScripts/Login.php";
-
-        RequestQueue queue  = MySingleton.getInstance(this.getApplicationContext()).
-                getRequestQueue();
-
+        String url = ConstantURL.SITE_URL +"Login.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
