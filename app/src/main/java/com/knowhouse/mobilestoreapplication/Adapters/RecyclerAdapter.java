@@ -1,6 +1,6 @@
 package com.knowhouse.mobilestoreapplication.Adapters;
 
-import android.os.Bundle;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,11 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.knowhouse.mobilestoreapplication.DataSettersAndGetters.FoodDescription;
-import com.knowhouse.mobilestoreapplication.Fragments.FragmentCollection;
+import com.knowhouse.mobilestoreapplication.Interfaces.RecyclerViewClickInterface;
 import com.knowhouse.mobilestoreapplication.R;
 
 import java.util.ArrayList;
@@ -21,8 +21,8 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
-    private FragmentTransaction fragmentTransaction;
-
+    private Context context;
+    private RecyclerViewClickInterface recyclerViewClickInterface;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -37,9 +37,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     private ArrayList<FoodDescription> dataSet;
 
-    public RecyclerAdapter(ArrayList<FoodDescription> dataSet, FragmentTransaction fragmentTransaction) {
+    public RecyclerAdapter(ArrayList<FoodDescription> dataSet,
+                           Context context,RecyclerViewClickInterface recyclerViewClickInterface) {
         this.dataSet = dataSet;
-        this.fragmentTransaction = fragmentTransaction;
+        this.context = context;
+        this.recyclerViewClickInterface = recyclerViewClickInterface;
     }
 
     @NonNull
@@ -65,17 +67,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         location.setText(new StringBuilder(", ").append("Kumasi"));
         foodRating.setRating(foodDescription.getFoodRating());
 
+        String url = foodDescription.getFoodImageUrl();
+        Glide.with(context)
+                .load(url)
+                .placeholder(R.drawable.blank_background)
+                .into(foodImage);
+
         cardView.setOnClickListener(v -> {
-            FragmentCollection fragmentCollection = new FragmentCollection();
-            Bundle args = new Bundle();
-            args.putInt(FragmentCollection.ARGS_POSITION,position);
-            fragmentCollection.setArguments(args);
-
-            FragmentTransaction transaction = fragmentTransaction;
-            transaction.replace(R.id.content_switch,fragmentCollection);
-            transaction.addToBackStack(null);
-            transaction.commit();
-
+            recyclerViewClickInterface.onItemClick(position,url);
         });
     }
 

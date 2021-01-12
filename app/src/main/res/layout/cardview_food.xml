@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="280dp"
         android:scaleType="fitXY"
-        android:src="@drawable/lucy_image"
+        android:src="@drawable/blank_background"
         android:contentDescription="@string/food_image" />
 
     <LinearLayout
