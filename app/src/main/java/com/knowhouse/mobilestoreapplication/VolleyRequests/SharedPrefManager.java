@@ -2,9 +2,11 @@ package com.knowhouse.mobilestoreapplication.VolleyRequests;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.location.Location;
 
 public class SharedPrefManager {
+    private static final String KEY_BIRTH_DATE = "birth_date" ;
+    private static final String KEY_CUSTOMER_IMAGE_URL = "customer_image_url" ;
+    private static final String KEY_CUSTOMER_LOCATION = "customer_location";
     private static SharedPrefManager mInstance;
     private static Context mCtx;
     private static final String SHARE_PREF_NAME = "mysharedpref";
@@ -47,7 +49,7 @@ public class SharedPrefManager {
     public String getPhoneNumber() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
                 Context.MODE_PRIVATE);
-        return String.valueOf(sharedPreferences.getInt(KEY_PHONE_NUMBER, 0));
+        return sharedPreferences.getString(KEY_PHONE_NUMBER,null);
     }
 
 
@@ -71,15 +73,20 @@ public class SharedPrefManager {
         editor.apply();
     }
 
-    public void onUserLogin(int id,int phoneNumber,String full_name,String email){
+    public void onUserLogin(int id,String fullName,String email,
+                            String phoneNumber,String birthDate,String customerImageUrl,
+                            String customerLocation){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putInt(KEY_ID,id);
-        editor.putInt(KEY_PHONE_NUMBER,phoneNumber);
-        editor.putString(KEY_FULL_NAME,full_name);
+        editor.putString(KEY_PHONE_NUMBER,phoneNumber);
+        editor.putString(KEY_FULL_NAME,fullName);
         editor.putString(KEY_EMAIL,email);
+        editor.putString(KEY_BIRTH_DATE,birthDate);
+        editor.putString(KEY_CUSTOMER_IMAGE_URL,customerImageUrl);
+        editor.putString(KEY_CUSTOMER_LOCATION,customerLocation);
         editor.apply();
     }
 

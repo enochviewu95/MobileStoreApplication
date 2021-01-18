@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.knowhouse.mobilestoreapplication.VolleyRequests.MySingleton;
 
 import org.json.JSONException;
@@ -37,6 +36,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     private TextInputEditText phoneNumber;
     private TextInputEditText password;
     private TextInputEditText confirmPassword;
+    private TextInputEditText birthDate;
 
     private ProgressDialog progressDialog;
 
@@ -54,6 +54,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         fullName = findViewById(R.id.full_name_edit_text);
         email = findViewById(R.id.email_edit_text);
         phoneNumber = findViewById(R.id.number_edit_text);
+        birthDate = findViewById(R.id.date_edit_text);
         password = findViewById(R.id.password_edit_text);
         confirmPassword = findViewById(R.id.confirm_password_edit_text);
         signUpButton = findViewById(R.id.signup_button);
@@ -67,14 +68,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //Check if user is signed in (non-null) and updata UI accordingly
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
-
     /**
      * OnClick method to be called when the signUpButton is called
      * @param v holds the reference to the widget that issued the onClick listener
@@ -85,12 +78,13 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         if(fullName.getText() != null && email.getText() != null
                 && phoneNumber.getText() != null && password.getText() != null
-                && confirmPassword.getText()!=null){        //test for an empty field
+                && confirmPassword.getText()!=null && birthDate.getText() != null){        //test for an empty field
                 String mFullName = fullName.getText().toString().trim();    //Get text for full name
                 String mEmail = email.getText().toString().trim();  //get text for email and convert to string
                 String mPassword = password.getText().toString().trim();    //get text for password and convert to string
                 String mConfirmPassword = confirmPassword.getText().toString().trim();
                 String mPhoneNumber = phoneNumber.getText().toString().trim();  //get text for phone number
+                String mBirthDate = birthDate.getText().toString().trim();
 
                 if(!mEmail.isEmpty() && !mPassword.isEmpty()){
                     if(mPassword.equals(mConfirmPassword)){
@@ -105,9 +99,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                         if(task.isSuccessful()){
                                             //Sign in success,
                                             Log.d(TAG,"createUserWithEmail: success");
-                                            registerUser(mFullName,mEmail,mPhoneNumber,mPassword);
-                                            FirebaseUser user = mAuth.getCurrentUser();
-                                            updateUI(user);
+                                            registerUser(mFullName,mEmail,mPhoneNumber,mPassword,mBirthDate);
+                                            updateUI();
                                         }else{
                                             //if sign in fails, display a message to the user
                                             progressDialog.dismiss();
@@ -115,7 +108,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                             if(task.getException() != null)
                                                 Toast.makeText(RegistrationActivity.this,task.getException().getMessage(),
                                                     Toast.LENGTH_LONG).show();
-                                            updateUI(null);
                                         }
                                     }
                                 });
@@ -131,7 +123,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void registerUser(String name, String email,String phoneNumber,
-                                 String password){
+                                 String password,String birthDay){
 
         String url = "http://192.168.42.61/MobileStoreApp/PhpScripts/Registration.php";
 
@@ -163,25 +155,18 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 params.put("email",email);
                 params.put("phone_number",phoneNumber);
                 params.put("password",password);
-
+                params.put("birthday",birthDay);
                 return params;
             }
         };
         MySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    /**
-     * Update user interface accordingly.
-     * This is going to launch the MainActivity activity
-     * @param currentUser parameter holding the current user
-     */
-    private void updateUI(FirebaseUser currentUser) {
-        //if current user is not null, launch the MainActivity activity
-        if(currentUser != null){
+    private void updateUI() {
+
             progressDialog.dismiss();
             startActivity(new Intent(RegistrationActivity.
-                    this,MainActivity.class));
+                    this,LoginActivity.class));
             finish();
-        }
     }
 }

@@ -1,12 +1,11 @@
 package com.knowhouse.mobilestoreapplication.Fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.knowhouse.mobilestoreapplication.R;
 
@@ -20,13 +19,12 @@ public class FragmentContentSwitch extends Fragment{
         View view = inflater.inflate(R.layout.fragment_content_switch,container,false);
 
         if(getActivity() != null){
-            FragmentMain fragmentMain = new FragmentMain();
-            fragmentMain.setArguments(getActivity().getIntent().getExtras());
+            FragmentCategories fragmentCategories = new FragmentCategories();
+            fragmentCategories.setArguments(getActivity().getIntent().getExtras());
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_switch,fragmentMain).commit();
+                    .replace(R.id.content_switch,fragmentCategories).commit();
 
         }
-
         return view;
     }
 

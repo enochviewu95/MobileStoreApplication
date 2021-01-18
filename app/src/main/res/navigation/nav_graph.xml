@@ -45,4 +45,9 @@
         android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentContentSwitch"
         android:label="fragment_content_switch"
         tools:layout="@layout/fragment_content_switch" />
+    <fragment
+        android:id="@+id/fragmentCategories"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentCategories"
+        android:label="fragment_categories"
+        tools:layout="@layout/fragment_categories" />
 </navigation>

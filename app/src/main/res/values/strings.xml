@@ -45,6 +45,7 @@
     <string name="dialog_message">Location permission needed for delivery of food</string>
     <string name="okayButton">Ok</string>
     <string name="cancel">Cancel</string>
+    <string name="date_of_birth">Date of birth (yyyy-mm-dd)</string>
 
     <string-array name="gender_list">
         <item>M</item>

@@ -57,8 +57,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser  = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        SharedPrefManager sharedPrefManager = SharedPrefManager.getInstance(this);
+        if(sharedPrefManager.getUserEmail() != null){
+            FirebaseUser currentUser  = mAuth.getCurrentUser();
+            updateUI(currentUser);
+        }
     }
 
     @Override
@@ -129,9 +132,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if(!obj.getBoolean("error")){
                             SharedPrefManager.getInstance(getApplicationContext())
                                     .onUserLogin(content.getInt("id"),
-                                                content.getInt("contact"),
                                                 content.getString("full_name"),
-                                                content.getString("email"));
+                                                content.getString("email"),
+                                                content.getString("contact"),
+                                                content.getString("birth_date"),
+                                                content.getString("customer_image_url"),
+                                                content.getString("customer_location"));
                             Toast.makeText(getApplicationContext(),obj.getString("message"),Toast.LENGTH_LONG)
                                     .show();
                         }else{

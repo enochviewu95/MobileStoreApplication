@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.knowhouse.mobilestoreapplication.DataSettersAndGetters.FoodDescription;
+import com.knowhouse.mobilestoreapplication.DataSettersAndGetters.CFood;
 import com.knowhouse.mobilestoreapplication.Interfaces.RecyclerViewClickInterface;
 import com.knowhouse.mobilestoreapplication.R;
 
@@ -35,9 +35,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     }
 
-    private ArrayList<FoodDescription> dataSet;
+    private ArrayList<CFood> dataSet;
 
-    public RecyclerAdapter(ArrayList<FoodDescription> dataSet,
+    public RecyclerAdapter(ArrayList<CFood> dataSet,
                            Context context,RecyclerViewClickInterface recyclerViewClickInterface) {
         this.dataSet = dataSet;
         this.context = context;
@@ -55,19 +55,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         CardView cardView = holder.cardView;
-        FoodDescription foodDescription = dataSet.get(position);
+        CFood foodItems = dataSet.get(position);
         ImageView foodImage = (ImageView) cardView.findViewById(R.id.food_image);
         TextView foodName = (TextView) cardView.findViewById(R.id.food_name);
         TextView shop = (TextView) cardView.findViewById(R.id.seller);
         TextView location = (TextView) cardView.findViewById(R.id.location);
         RatingBar foodRating = (RatingBar) cardView.findViewById(R.id.food_rating);
 
-        foodName.setText(foodDescription.getFoodName());
+        foodName.setText(foodItems.getFoodName());
         shop.setText("God Be with us");
         location.setText(new StringBuilder(", ").append("Kumasi"));
-        foodRating.setRating(foodDescription.getFoodRating());
+        foodRating.setRating(foodItems.getFoodRating());
 
-        String url = foodDescription.getFoodImageUrl();
+        String url = foodItems.getFoodImageUrl();
         Glide.with(context)
                 .load(url)
                 .placeholder(R.drawable.blank_background)

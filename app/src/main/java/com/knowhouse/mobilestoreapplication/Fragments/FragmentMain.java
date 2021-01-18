@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.knowhouse.mobilestoreapplication.Adapters.RecyclerAdapter;
-import com.knowhouse.mobilestoreapplication.DataSettersAndGetters.FoodDescription;
+import com.knowhouse.mobilestoreapplication.DataSettersAndGetters.CFood;
 import com.knowhouse.mobilestoreapplication.Interfaces.RecyclerViewClickInterface;
 import com.knowhouse.mobilestoreapplication.R;
 import com.knowhouse.mobilestoreapplication.VolleyRequests.ConstantURL;
@@ -28,11 +28,12 @@ import java.util.ArrayList;
 
 public class FragmentMain extends Fragment implements RecyclerViewClickInterface {
 
+    public static final String ARGS_POSITION = "position" ;
     private static final String LOG_TAG = "FragmentMain" ;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<FoodDescription> foodArrayList;
+    private ArrayList<CFood> foodArrayList;
     private FragmentTransaction fragmentTransaction;
     private Context context;
     private RecyclerViewClickInterface recyclerViewClickInterface;
@@ -91,16 +92,15 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
                             for(int i = 0; i<foodArray.length();i++){
                                 JSONObject foodList = foodArray.getJSONObject(i);
                                 int id = foodList.getInt("food_id");
+                                String foodName = foodList.getString("food_name");
                                 String foodImageUrl = foodList.getString("food_image_url");
                                 int foodRating = foodList.getInt("food_rating");
-                                String foodName = foodList.getString("food_name");
-                                int storeDetailsID = foodList.getInt("store_details_id");
-                                int foodPrice = foodList.getInt("food_price");
+                                String foodDescription = foodList.getString("food_description");
+                                int foodDetailsId = foodList.getInt("food_details");
+                                CFood foodListing = new CFood(id,foodName,
+                                        foodImageUrl,foodRating,foodDescription,null);
 
-                                FoodDescription foodDescription = new FoodDescription(id,foodImageUrl,
-                                        foodRating,foodName,storeDetailsID,foodPrice);
-
-                                foodArrayList.add(foodDescription);
+                                foodArrayList.add(foodListing);
                             }
 
                             //specify an adapter
