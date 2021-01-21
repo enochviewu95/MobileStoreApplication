@@ -25,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FragmentMain extends Fragment implements RecyclerViewClickInterface {
 
@@ -32,11 +34,11 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
     private static final String LOG_TAG = "FragmentMain" ;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     private ArrayList<CFood> foodArrayList;
     private FragmentTransaction fragmentTransaction;
     private Context context;
     private RecyclerViewClickInterface recyclerViewClickInterface;
+    private int foodCategoryPosition;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +46,12 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main,container,false);
 
+        Bundle position = getArguments();
+
         recyclerView = view.findViewById(R.id.recycler_view);
+
+        if(position != null)
+            foodCategoryPosition = position.getInt(FragmentMain.ARGS_POSITION);
 
         context = getContext();
         recyclerViewClickInterface = this;
@@ -56,7 +63,7 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
         foodArrayList = new ArrayList<>();       //Array list to hold the individual food object
 
         //use a linear layout manager
-        layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         return view;
     }
@@ -65,10 +72,8 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
     public void onItemClick(int position,String url) {
         FragmentCollection fragmentCollection = new FragmentCollection();
         Bundle args = new Bundle();
-        args.putInt(FragmentCollection.ARGS_POSITION,position);
-        args.putString(FragmentCollection.ARGS_URL,url);
+        args.putSerializable(FragmentCollection.ARGS_FOOD_OBJECT,foodArrayList.get(position));
         fragmentCollection.setArguments(args);
-
         FragmentTransaction transaction = fragmentTransaction;
         transaction.replace(R.id.content_switch,fragmentCollection);
         transaction.addToBackStack(null);
@@ -79,7 +84,7 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
     private void getFoodList(){
        String url = ConstantURL.SITE_URL+"FoodDescription.php";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
                     JSONObject content = null;
                     JSONArray foodArray = null;
@@ -96,9 +101,9 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
                                 String foodImageUrl = foodList.getString("food_image_url");
                                 int foodRating = foodList.getInt("food_rating");
                                 String foodDescription = foodList.getString("food_description");
-                                int foodDetailsId = foodList.getInt("food_details");
+                                int foodCategoryId = foodList.getInt("food_category_id");
                                 CFood foodListing = new CFood(id,foodName,
-                                        foodImageUrl,foodRating,foodDescription,null);
+                                        foodImageUrl,foodRating,foodDescription,foodCategoryId);
 
                                 foodArrayList.add(foodListing);
                             }
@@ -116,7 +121,14 @@ public class FragmentMain extends Fragment implements RecyclerViewClickInterface
                 error -> {
 
                 }
-        );
+        ){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("food_category_id",String.valueOf(foodCategoryPosition+1));
+                return params;
+            }
+        };
 
         MySingleton.getInstance(getContext()).addToRequestQueue(stringRequest);
     }

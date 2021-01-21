@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.knowhouse.mobilestoreapplication.DataSettersAndGetters.CFood;
 import com.knowhouse.mobilestoreapplication.Fragments.FragmentCollection;
 import com.knowhouse.mobilestoreapplication.Fragments.FragmentDescription;
 import com.knowhouse.mobilestoreapplication.Fragments.FragmentMap;
@@ -29,13 +30,10 @@ public class StateAdapter extends FragmentStateAdapter {
 
         Fragment fragment;
         Bundle orderDetails = new Bundle();
-        int itemPositionValue = itemValues.getInt(FragmentCollection.ARGS_POSITION);
-        String itemUrl = itemValues.getString(FragmentCollection.ARGS_URL);
-
+        CFood foodObj = (CFood) itemValues.getSerializable(FragmentCollection.ARGS_FOOD_OBJECT);
         switch(position){
             case 0:
-                orderDetails.putInt(FragmentOrder.ARG_POSITION,itemPositionValue);
-                orderDetails.putString(FragmentOrder.ARG_URL,itemUrl);
+                orderDetails.putSerializable(FragmentOrder.FOOD_OBJ,foodObj);
                 fragment = new FragmentOrder();
                 fragment.setArguments(orderDetails);
                 return fragment;

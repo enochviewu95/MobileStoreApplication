@@ -9,15 +9,15 @@ public class CFood implements Serializable {
     private String foodImageUrl;
     private int foodRating;
     private String foodDescription;
-    private CFoodDetails foodDetails;
+    private int foodCategoryID;
 
-    public CFood(int foodId, String foodName, String foodImageUrl, int foodRating, String foodDescription, CFoodDetails foodDetails) {
+    public CFood(int foodId, String foodName, String foodImageUrl, int foodRating, String foodDescription, int foodCategoryID) {
         this.foodId = foodId;
         this.foodName = foodName;
         this.foodImageUrl = foodImageUrl;
         this.foodRating = foodRating;
         this.foodDescription = foodDescription;
-        this.foodDetails = foodDetails;
+        this.foodCategoryID = foodCategoryID;
     }
 
     public int getFoodId() {
@@ -40,7 +40,7 @@ public class CFood implements Serializable {
         return foodDescription;
     }
 
-    public CFoodDetails getFoodDetails() {
-        return foodDetails;
+    public int getFoodCategoryID() {
+        return foodCategoryID;
     }
 }

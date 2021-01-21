@@ -22,6 +22,7 @@ import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.knowhouse.mobilestoreapplication.Adapters.StateAdapter;
+import com.knowhouse.mobilestoreapplication.DataSettersAndGetters.CFood;
 import com.knowhouse.mobilestoreapplication.R;
 import com.knowhouse.mobilestoreapplication.Utilities.BlurBuilder;
 
@@ -30,12 +31,11 @@ import java.util.Objects;
 
 public class FragmentCollection extends Fragment {
 
-
-    public static final String ARGS_POSITION = "position";
-    public static final String ARGS_URL = "url";
+    public static final String ARGS_FOOD_OBJECT = "food_object";
     private Toolbar blurredImage;
     private Toolbar toolbar;
     private Bundle itemValue;
+    private CFood foodObj;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,7 +46,9 @@ public class FragmentCollection extends Fragment {
         toolbar = view.findViewById(R.id.tool_bar);
         ((AppCompatActivity) requireActivity()).setSupportActionBar(toolbar);
         Objects.requireNonNull(((AppCompatActivity) requireActivity()).getSupportActionBar()).setTitle("");
-        String url = itemValue.getString(FragmentCollection.ARGS_URL);
+        foodObj = (CFood) itemValue.getSerializable(FragmentCollection.ARGS_FOOD_OBJECT);
+        assert foodObj != null;
+        String url = foodObj.getFoodImageUrl();
         convertBitmapToDrawable(url);
         return view;
     }
