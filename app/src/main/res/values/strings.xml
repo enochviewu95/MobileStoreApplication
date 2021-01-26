@@ -43,7 +43,7 @@
     <string name="default_email">johndoe@gmail.com</string>
     <string name="default_phone">xxx-xxx-xxxx</string>
     <string name="dialog_message">Location permission needed for delivery of food</string>
-    <string name="okayButton">Ok</string>
+    <string name="okayButton">OK</string>
     <string name="cancel">Cancel</string>
     <string name="date_of_birth">Date of birth (yyyy-mm-dd)</string>
     <string name="add_to_cart">Add To Cart</string>
@@ -54,6 +54,9 @@
     <string name="quantity_hint">0</string>
     <string name="price">Price :</string>
     <string name="total_amount">%$.02f%%</string>
+    <string name="food_in_cart">image of food in cart</string>
+    <string name="remove_item">Remove item from cart button</string>
+    <string name="cart">Cart</string>
 
     <string-array name="gender_list">
         <item>M</item>

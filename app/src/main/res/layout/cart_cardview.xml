@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cart_cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp">
+
+    <RelativeLayout
+        android:id="@+id/cart_relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/cartFoodImage"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="fitXY"
+            android:layout_alignParentStart="true"
+            android:contentDescription="@string/food_in_cart"/>
+
+
+        <GridLayout
+            android:id="@+id/cart_cardview_gridlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cartFoodImage"
+            android:layout_margin="10dp"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
+
+            <TextView
+                android:id="@+id/foodTextView"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_gravity="end"
+                android:text="@string/food"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <TextView
+                android:id="@+id/foodValueTextView"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_gravity="fill_horizontal"
+                android:ems="5"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_gravity="end"
+                android:text="@string/description"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+            <TextView
+                android:id="@+id/descriptionValueTextView"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:ems="5"
+                android:layout_gravity="fill_horizontal"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+            <TextView
+                android:id="@+id/quantityTextView"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:layout_gravity="end"
+                android:text="@string/quantity"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+            <TextView
+                android:id="@+id/quantityValueTextView"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:ems="5"
+                android:layout_gravity="fill_horizontal"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+            <TextView
+                android:id="@+id/optionTextView"
+                android:layout_row="3"
+                android:layout_column="0"
+                android:layout_gravity="end"
+                android:text="@string/options"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+            <TextView
+                android:id="@+id/optionValueTextView"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:layout_gravity="fill_horizontal"
+                android:ems="5"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+            <TextView
+                android:id="@+id/priceTextView"
+                android:layout_row="4"
+                android:layout_column="0"
+                android:layout_gravity="end"
+                android:text="@string/price"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+            <TextView
+                android:id="@+id/priceValueTextView"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:layout_gravity="fill_horizontal"
+                android:ems="5"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        </GridLayout>
+
+
+        <ImageButton
+            android:id="@+id/remove_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:src="@android:drawable/presence_offline"
+            android:contentDescription="@string/remove_item"
+            android:background="@android:color/transparent"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

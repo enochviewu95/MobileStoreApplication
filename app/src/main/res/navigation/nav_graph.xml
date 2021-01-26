@@ -16,11 +16,6 @@
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" />
     <fragment
-        android:id="@+id/fragmentChat"
-        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentChat"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
-    <fragment
         android:id="@+id/fragmentSettings"
         android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentSettings"
         android:label="fragment_settings"
@@ -50,4 +45,9 @@
         android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentCategories"
         android:label="fragment_categories"
         tools:layout="@layout/fragment_categories" />
+    <fragment
+        android:id="@+id/fragmentCart"
+        android:name="com.knowhouse.mobilestoreapplication.Fragments.FragmentCart"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>
