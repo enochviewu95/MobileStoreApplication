@@ -57,6 +57,14 @@
     <string name="food_in_cart">image of food in cart</string>
     <string name="remove_item">Remove item from cart button</string>
     <string name="cart">Cart</string>
+    <string name="personal_details">Personal Details</string>
+    <string name="order_details">Order Details</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="name">Name:</string>
+    <string name="email">Email:</string>
+    <string name="phone_no">Phone No.:</string>
+    <string name="total_quantity">Total Quantity:</string>
+    <string name="sum_total">Sum Total:</string>
 
     <string-array name="gender_list">
         <item>M</item>
