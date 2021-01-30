@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FragmentOrder extends Fragment {
+public class FragmentOrder extends Fragment{
 
     public static final String FOOD_OBJ = "food_obj";
     private RadioGroup optionsLayout;
@@ -200,9 +200,13 @@ public class FragmentOrder extends Fragment {
 
     private final Button.OnClickListener clickListener = v -> new CGetCartDetailsTask().execute();
 
+
+
+
     private class CGetCartDetailsTask extends AsyncTask<Object,Void,Boolean> {
 
         ContentValues values;
+        boolean isQuantitySet;
 
         @Override
         protected void onPreExecute() {
@@ -214,24 +218,30 @@ public class FragmentOrder extends Fragment {
             TextView foodPriceValue = view.findViewById(R.id.foodPriceValue);
 
 
-            int checkedRadioButtonId = foodOptionsLayout.getCheckedRadioButtonId();
-            RadioButton radioButton = radioButtons[checkedRadioButtonId];
+            if(foodQuantityValue.getText().toString().isEmpty()){
+                isQuantitySet = false;
+            }else{
 
-            String foodUrl = foodObj.getFoodImageUrl();
-            String foodName = foodNameValue.getText().toString();
-            String foodDescription = foodDescriptionValue.getText().toString();
-            String foodQuantity = foodQuantityValue.getText().toString();
-            String foodOption = radioButton.getText().toString();
-            String foodPrice = foodPriceValue.getText().toString()
-                    .replace("GHS","");
+                int checkedRadioButtonId = foodOptionsLayout.getCheckedRadioButtonId();
+                RadioButton radioButton = radioButtons[checkedRadioButtonId];
 
-            values = new ContentValues();
-            values.put(CartReaderContract.CartEntry.COLUMN_IMAGE_URL,foodUrl);
-            values.put(CartReaderContract.CartEntry.COLUMN_FOOD_VALUE_TEXT,foodName);
-            values.put(CartReaderContract.CartEntry.COLUMN_DESCRIPTION_VALUE_TEXT,foodDescription);
-            values.put(CartReaderContract.CartEntry.COLUMN_QUANTITY_VALUE_TEXT,foodQuantity);
-            values.put(CartReaderContract.CartEntry.COLUMN_OPTION_VALUE_TEXT,foodOption);
-            values.put(CartReaderContract.CartEntry.COLUMN_PRICE_VALUE_TEXT,foodPrice);
+                String foodUrl = foodObj.getFoodImageUrl();
+                String foodName = foodNameValue.getText().toString();
+                String foodDescription = foodDescriptionValue.getText().toString();
+                String foodQuantity = foodQuantityValue.getText().toString();
+                String foodOption = radioButton.getText().toString();
+                String foodPrice = foodPriceValue.getText().toString()
+                        .replace("GHS","");
+
+                values = new ContentValues();
+                values.put(CartReaderContract.CartEntry.COLUMN_IMAGE_URL,foodUrl);
+                values.put(CartReaderContract.CartEntry.COLUMN_FOOD_VALUE_TEXT,foodName);
+                values.put(CartReaderContract.CartEntry.COLUMN_DESCRIPTION_VALUE_TEXT,foodDescription);
+                values.put(CartReaderContract.CartEntry.COLUMN_QUANTITY_VALUE_TEXT,foodQuantity);
+                values.put(CartReaderContract.CartEntry.COLUMN_OPTION_VALUE_TEXT,foodOption);
+                values.put(CartReaderContract.CartEntry.COLUMN_PRICE_VALUE_TEXT,foodPrice);
+                isQuantitySet = true;
+            }
 
         }
 
@@ -239,10 +249,13 @@ public class FragmentOrder extends Fragment {
         protected Boolean doInBackground(Object... objects) {
             SQLiteOpenHelper sqLiteOpenHelper = new CartReaderDbHelper(getContext());
             try{
-                SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
-                db.insert(CartReaderContract.CartEntry.TABLE_NAME,null,values);
-                db.close();
-                return true;
+                if(isQuantitySet){
+                    SQLiteDatabase db = sqLiteOpenHelper.getWritableDatabase();
+                    db.insert(CartReaderContract.CartEntry.TABLE_NAME,null,values);
+                    db.close();
+                    return true;
+                }
+                return false;
             }catch (SQLException e){
                 e.printStackTrace();
                 return false;
@@ -251,13 +264,21 @@ public class FragmentOrder extends Fragment {
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
-            if(!aBoolean){
-                Toast.makeText(getContext(),"Couldn't insert value",Toast.LENGTH_LONG).show();
-            }else{
-                Toast.makeText(getContext(),"Order inserted into cart",Toast.LENGTH_LONG).show();
+            if(!isQuantitySet){
+                Toast.makeText(getContext(),"Please specify the quantity of orders",Toast.LENGTH_LONG)
+                        .show();
+            } else{
+                if(!aBoolean){
+                    Toast.makeText(getContext(),"Couldn't insert value",Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getContext(),"Order inserted into cart",Toast.LENGTH_LONG).show();
+                }
             }
+
         }
     }
+
+
 
 
 }

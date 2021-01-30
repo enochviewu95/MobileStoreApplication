@@ -37,6 +37,7 @@ import static com.knowhouse.mobilestoreapplication.StorageUtilities.CartReaderCo
 
 public class FragmentCart extends Fragment implements RecyclerViewClickInterface{
 
+    public static final String REFRESH_LAYOUT = "refresh";
     private View view;
     private RecyclerViewClickInterface recyclerViewClickInterface;
     private RecyclerView recyclerView;
@@ -65,6 +66,7 @@ public class FragmentCart extends Fragment implements RecyclerViewClickInterface
 
         return view;
     }
+
 
     @Override
     public void onItemClick(int position, String url) {
