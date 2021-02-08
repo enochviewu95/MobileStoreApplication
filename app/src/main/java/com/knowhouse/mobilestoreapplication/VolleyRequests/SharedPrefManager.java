@@ -62,14 +62,14 @@ public class SharedPrefManager {
     public String getLocation(){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
                 Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_LOCATION,null);
+        return sharedPreferences.getString(KEY_CUSTOMER_LOCATION,null);
     }
 
     public void setLocation(String myLocation){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_LOCATION,myLocation);
+        editor.putString(KEY_CUSTOMER_LOCATION,myLocation);
         editor.apply();
     }
 

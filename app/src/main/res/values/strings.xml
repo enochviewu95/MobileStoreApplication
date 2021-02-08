@@ -29,9 +29,9 @@
     <string name="sign_up">Sign Up</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="questionnaire">Already have an account?</string>
-    <string name="gender">Gender</string>
+    <string name="gender">Gender:</string>
     <string name="age">Age</string>
-    <string name="location_title">Location</string>
+    <string name="location_title">Location:</string>
     <string name="save">Save</string>
     <string name="logout">Logout</string>
     <string name="send_button_content_descrip">Send Button</string>
@@ -65,10 +65,16 @@
     <string name="phone_no">Phone No.:</string>
     <string name="total_quantity">Total Quantity:</string>
     <string name="sum_total">Sum Total:</string>
+    <string name="birthday">Birthday:</string>
+    <string name="email_edit_button">email edit button</string>
+    <string name="birthdate">dd/mm/yyyy</string>
+    <string name="phone_number_edit_button">phone number edit button</string>
+    <string name="birthday_edit_button">birthday edit button</string>
+    <string name="gender_edit_button">gender edit button</string>
 
     <string-array name="gender_list">
-        <item>M</item>
-        <item>F</item>
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 
     <string-array name="theme_list">

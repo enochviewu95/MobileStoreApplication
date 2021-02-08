@@ -21,6 +21,6 @@
     
     <style name="SpinnerEdit" parent="AppTheme">
         <item name="android:textColorPrimary">@color/user_profile_theme_color</item>
-        <item name="android:textAlignment">center</item>
+        <item name="android:textAlignment">textStart</item>
     </style>
 </resources>
