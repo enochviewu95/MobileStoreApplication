@@ -2,20 +2,28 @@ package com.knowhouse.mobilestoreapplication.Fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.Spinner;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -28,22 +36,35 @@ import com.knowhouse.mobilestoreapplication.R;
 import com.knowhouse.mobilestoreapplication.VolleyRequests.SharedPrefManager;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FragmentUserProfile extends Fragment implements View.OnClickListener{
+import static android.app.Activity.RESULT_OK;
 
-    private Button logoutButton;
+public class FragmentUserProfile extends Fragment{
+
+    private static final int IMG_REQUEST = 1 ;
     private CircleImageView profileImage;
     private TextView userFullName;
-    private Spinner gender;
-    private TextInputEditText age;
     private TextView locations;
     private TextInputEditText email;
     private TextInputEditText phoneNumber;
+    private TextInputEditText birthDate;
+
+    private Button logoutButton;
     private Button saveButton;
+
+    private Bitmap bitmap;
+
+    private ImageButton profileEditButton;
+
+
+    private Calendar myCalendar;
+
 
     private FusedLocationProviderClient fusedLocationClient;
 
@@ -60,27 +81,49 @@ public class FragmentUserProfile extends Fragment implements View.OnClickListene
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
         checkPermission();
 
-        logoutButton = view.findViewById(R.id.logout);
+        //TextViews
         profileImage = view.findViewById(R.id.profile_image);
         userFullName  = view.findViewById(R.id.user_full_name);
-        //gender = view.findViewById(R.id.gender_spinner);
-        //age = view.findViewById(R.id.userAge);
         locations = view.findViewById(R.id.default_location);
+
         email = view.findViewById(R.id.user_profile_email);
         phoneNumber = view.findViewById(R.id.user_profile_phone);
+        birthDate = view.findViewById(R.id.userAge);
+
+        //Buttons
+        logoutButton = view.findViewById(R.id.logout);
         saveButton = view.findViewById(R.id.save_button);
 
+        profileEditButton = view.findViewById(R.id.profile_image_edit_button);
 
 
+        myCalendar = Calendar.getInstance();
 
 
-        logoutButton.setOnClickListener(this);
+        //Button OnClickListener
+        saveButton.setOnClickListener(saveButtonClicked);
+        logoutButton.setOnClickListener(logoutButtonClicked);
+
+        //Image Button OnClickListener
+        email.setOnClickListener(emailEditButtonClicked);
+        phoneNumber.setOnClickListener(phoneNoEditButtonClicked);
+        birthDate.setOnClickListener(birthdayEditButtonClicked);
+        profileEditButton.setOnClickListener(profileEditButtonClicked);
         return view;
     }
 
+    private DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            myCalendar.set(Calendar.YEAR,year);
+            myCalendar.set(Calendar.MONTH,month);
+            myCalendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            updateLabel();
+        }
+    };
 
-    @Override
-    public void onClick(View v) {
+
+    private View.OnClickListener logoutButtonClicked = v -> {
         if(SharedPrefManager.getInstance(getContext())
                 .logOut()){
 
@@ -88,7 +131,65 @@ public class FragmentUserProfile extends Fragment implements View.OnClickListene
             startActivity(new Intent(getContext(),LoginActivity.class));
             requireActivity().finish();
         }
+    };
+
+    private View.OnClickListener profileEditButtonClicked = v ->{
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,IMG_REQUEST);
+    };//Select image for the user profile image
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == IMG_REQUEST && resultCode == RESULT_OK && data != null){
+            Uri path = data.getData();
+            try {
+                bitmap = MediaStore.Images.Media.
+                        getBitmap(requireActivity().getContentResolver(),path);
+                profileImage.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
+
+    private View.OnClickListener emailEditButtonClicked = v -> {
+        if(!email.isFocusable()){
+            if(email.requestFocus()){
+                InputMethodManager imm = (InputMethodManager)
+                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                assert imm != null;
+                imm.showSoftInput(email, InputMethodManager.SHOW_IMPLICIT);
+            }
+        }
+    };
+
+    private View.OnClickListener phoneNoEditButtonClicked = v -> {
+        if(phoneNumber.isFocusable()){
+            if(phoneNumber.requestFocus()){
+                InputMethodManager imm = (InputMethodManager)
+                        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                assert imm != null;
+                imm.showSoftInput(phoneNumber, InputMethodManager.SHOW_IMPLICIT);
+            }
+        }
+    };
+
+    private View.OnClickListener birthdayEditButtonClicked = v -> {
+        new DatePickerDialog(requireContext(),date,myCalendar
+                    .get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),
+                    myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    };
+
+    private View.OnClickListener saveButtonClicked = v -> {
+
+    };
+
+
 
     @Override
     public void onStart() {
@@ -140,6 +241,12 @@ public class FragmentUserProfile extends Fragment implements View.OnClickListene
 
                 }
             });
+
+    private void updateLabel(){
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat,Locale.getDefault());
+        birthDate.setText(sdf.format(myCalendar.getTime()));
+    }
 
     private void populateView(){
         SharedPrefManager prefManager = SharedPrefManager.getInstance(getContext());

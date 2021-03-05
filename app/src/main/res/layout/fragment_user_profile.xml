@@ -14,7 +14,7 @@
         android:useDefaultMargins="true"
         android:layout_margin="8dp"
         android:layout_below="@id/user_profile_header"
-        android:columnCount="3">
+        android:columnCount="2">
 
         <TextView
             android:id="@+id/profile_email"
@@ -32,22 +32,14 @@
             android:layout_column="1"
             android:background="@drawable/edit_text_drawable"
             android:padding="8dp"
-            android:focusable="false"
+            android:focusable="true"
+            android:clickable="true"
             android:inputType="textEmailAddress"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_gravity="fill_horizontal"
             android:textColor="@color/user_profile_theme_color"
             android:text="@string/default_email" />
 
-        <ImageButton
-            android:id="@+id/email_edit_button"
-            android:layout_column="2"
-            android:layout_row="0"
-            android:src="@drawable/image_edit_button"
-            android:background="@android:color/transparent"
-            android:padding="8dp"
-            android:elevation="4dp"
-            android:contentDescription="@string/email_edit_button" />
 
         <TextView
             android:id="@+id/profile_number"
@@ -63,24 +55,16 @@
             android:id="@+id/user_profile_phone"
             android:layout_row="1"
             android:layout_column="1"
-            android:focusable="false"
             android:inputType="textEmailAddress"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_gravity="fill_horizontal"
             android:padding="8dp"
+            android:focusable="true"
+            android:clickable="true"
             android:background="@drawable/edit_text_drawable"
             android:text="@string/default_phone"
             android:textColor="@color/user_profile_theme_color"/>
 
-        <ImageButton
-            android:id="@+id/phone_edit_button"
-            android:layout_column="2"
-            android:layout_row="1"
-            android:src="@drawable/image_edit_button"
-            android:background="@android:color/transparent"
-            android:padding="8dp"
-            android:elevation="4dp"
-            android:contentDescription="@string/phone_number_edit_button" />
 
         <TextView
             android:id="@+id/profile_age"
@@ -96,8 +80,8 @@
             android:id="@+id/userAge"
             android:layout_row="2"
             android:layout_column="1"
-            android:focusable="false"
             android:text="@string/birthdate"
+            android:focusable="false"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_gravity="fill_horizontal"
             android:padding="8dp"
@@ -105,15 +89,6 @@
             android:inputType="date"
             android:textColor="@color/user_profile_theme_color" />
 
-        <ImageButton
-            android:id="@+id/birthday_edit_button"
-            android:layout_column="2"
-            android:layout_row="2"
-            android:src="@drawable/image_edit_button"
-            android:background="@android:color/transparent"
-            android:padding="8dp"
-            android:elevation="4dp"
-            android:contentDescription="@string/birthday_edit_button" />
 
         <TextView
             android:id="@+id/profile_location"
@@ -131,7 +106,7 @@
             android:layout_rowSpan="3"
             android:layout_gravity="fill_horizontal"
             android:text="@string/place_located"
-            android:ems="14"
+            android:ems="10"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:padding="8dp"
             android:background="@drawable/edit_text_drawable"
@@ -215,6 +190,5 @@
             android:layout_alignBottom="@id/profile_image"
             android:layout_alignEnd="@id/profile_image"
             android:contentDescription="@string/gender_edit_button" />
-
     </RelativeLayout>
 </RelativeLayout>
