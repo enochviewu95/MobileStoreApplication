@@ -39,7 +39,7 @@
     <string name="enquiry">Enquiries</string>
     <string name="phone_number">Phone Number</string>
     <string name="age_number">00</string>
-    <string name="place_located">Accra</string>
+    <string name="place_located">Unknown Location</string>
     <string name="default_email">johndoe@gmail.com</string>
     <string name="default_phone">xxx-xxx-xxxx</string>
     <string name="dialog_message">Location permission needed for delivery of food</string>
@@ -71,6 +71,7 @@
     <string name="phone_number_edit_button">phone number edit button</string>
     <string name="birthday_edit_button">birthday edit button</string>
     <string name="gender_edit_button">gender edit button</string>
+    <string name="default_location">Unknown Location</string>
 
     <string-array name="gender_list">
         <item>Male</item>

@@ -56,7 +56,7 @@ public class SharedPrefManager {
     public String getUserID() {
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
                 Context.MODE_PRIVATE);
-        return sharedPreferences.getString(KEY_ID, null);
+        return String.valueOf(sharedPreferences.getInt(KEY_ID,0));
     }
 
     public String getLocation(){
@@ -64,6 +64,19 @@ public class SharedPrefManager {
                 Context.MODE_PRIVATE);
         return sharedPreferences.getString(KEY_CUSTOMER_LOCATION,null);
     }
+
+    public String getDataOfBirth(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
+                Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_BIRTH_DATE,null);
+    }
+
+    public String getCustomerImageUrl(){
+        SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
+                Context.MODE_PRIVATE);
+        return sharedPreferences.getString(KEY_CUSTOMER_IMAGE_URL,null);
+    }
+
 
     public void setLocation(String myLocation){
         SharedPreferences sharedPreferences = mCtx.getSharedPreferences(SHARE_PREF_NAME,
